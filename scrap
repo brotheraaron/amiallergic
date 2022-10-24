@@ -1,0 +1,80 @@
+from kivymd.app import MDApp
+from kivymd.uix.screen import Screen
+from kivymd.uix.button import MDRectangleFlatButton
+
+class Demo(MDApp):
+
+	def build(self):
+		screen = Screen()
+		
+		btn= MDRectangleFlatButton(text="Submit",pos_hint={'center_x':0.5,'center_y':0.3},on_release=self.btnfunc)
+		screen.add_widget(btn)
+		# adding widgets to screen
+	
+		return screen
+	def btnfunc(self,obj):
+		print("button is pressed!!")
+	
+if __name__=="__main__":
+	Demo().run()
+
+
+Button:
+        text: "pos_hint "
+        background_color: 0.1, 0.5, 0.6, 1
+ 
+        # Giving size hint i.e size of button is
+        # 30 % by height and width of layout .
+        size_hint: 0.3, 0.3
+         
+        # positioned at 0 % right and 100 % up / top
+        # from bottom left, i.e x, top = 0, 100 from bottom left:
+        pos_hint: {"x":0, "top":1}
+   
+           
+    Button:
+        text:"pos"
+        background_color: 0.4, 0.5, 0.6, 1
+        size_hint: 0.3, 0.3
+        pos: 100, 100
+   
+    Button:
+        text:"size_hint"
+        background_color: 0, 0, 1, 1
+ 
+        # Giving size hint i.e size of button is
+        # 40 % by height and  50 % width of layout .
+        size_hint: 0.5, 0.4
+        pos_hint: {"x":.4, "top":1}
+
+class LoginScreen(Screen):
+   def press_read(self):
+      app = App.get_running_app()
+      self.ids.lbl1.text = "SharedVar is " + str(app.MY_NUMBER)
+
+            Button:
+            text: 'Read'
+            on_press: root.press_read()
+      Button:
+            text: 'Change'
+            on_press:
+               app.MY_NUMBER = app.MY_NUMBER + 1
+               root.ids.lbl1.text = 'SharedVar is ' + str(app.MY_NUMBER)
+
+
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.label import Label
+from kivy.app import App
+from kivy.properties import ObjectProperty
+
+class KvRuleWidget(BoxLayout):
+    top_right_label = ObjectProperty()
+
+    def on_touch_down(self, touch):
+        print('The top right label is {}'.format(self.top_right_label))
+
+class ExampleApp(App):
+    def build(self):
+        return KvRuleWidget()
+
+username = self.ids['username'].text

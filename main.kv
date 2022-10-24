@@ -1,0 +1,28 @@
+#:import ZBarCam kivy_garden.zbarcam.ZBarCam
+#:import ZBarSymbol pyzbar.pyzbar.ZBarSymbol
+BoxLayout:
+    orientation: 'vertical'
+    ZBarCam:
+        id: zbarcam
+        # optional, by default checks all types
+        # code_types: ZBarSymbol.QRCODE, ZBarSymbol.EAN13
+    Label:
+        size_hint: 1.0, 0.3
+        pos_hint: {"x":0, "top":0.5}
+        size: self.texture_size[0], 100
+        font_size: 32
+        # text: ', '.join([str(symbol.data) for symbol in zbarcam.symbols])
+        text: "Hi there"
+        id: lbl1
+
+    Button:
+        # Giving size hint i.e size of button is
+        # 30 % by height and width of layout .
+        size_hint: 1.0, 0.3
+        
+        # positioned at 0 % right and 100 % up / top
+        # from bottom left, i.e x, top = 0, 100 from bottom left:
+        pos_hint: {"x":0, "top":1}
+
+        text: "Exit"
+        on_press: quit()
